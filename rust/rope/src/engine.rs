@@ -725,4 +725,23 @@ mod tests {
         engine.undo([1,2].iter().cloned().collect());
         assert_eq!("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", String::from(engine.get_head()));
     }
+
+    #[test]
+    fn gc_5() {
+        let mut engine = Engine::new(Rope::from("a"));
+        for i in 1..3 {
+            let d = Delta::simple_edit(Interval::new_closed_open(0,0), Rope::from("e"), engine.get_head().len());
+            let head = engine.get_head_rev_id();
+            engine.edit_rev(1, i, head, d.clone());
+        }
+        let gc : BTreeSet<usize> = [1].iter().cloned().collect();
+        engine.gc(&gc);
+
+        println!("{:#?}", engine);
+
+        let gc : BTreeSet<usize> = [2].iter().cloned().collect();
+        engine.gc(&gc);
+
+        assert_eq!("eeeea", String::from(engine.get_head()));
+    }
 }
