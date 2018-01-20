@@ -1,0 +1,17 @@
+[package]
+name = "xi-trace-ffi-examples"
+version = "0.1.0"
+license = "Apache-2.0"
+authors = ["Vitali Lovich <vlovich@google.com>"]
+categories = ["development-tools::profiling"]
+repository = "https://github.com/google/xi-editor"
+description = "Examples using FFI bindings from xi-trace-ffi"
+build = "build.rs"
+
+[dependencies]
+xi-trace-ffi = { path = "../trace-ffi" }
+xi-trace = { path = "../trace" }
+
+[build-dependencies.cc]
+version = "1.0"
+features = ["parallel"]

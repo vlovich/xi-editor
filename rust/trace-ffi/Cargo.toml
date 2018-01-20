@@ -1,0 +1,24 @@
+[package]
+name = "xi-trace-ffi"
+version = "0.1.0"
+license = "Apache-2.0"
+authors = ["Vitali Lovich <vlovich@google.com>"]
+categories = ["development-tools::profiling"]
+repository = "https://github.com/google/xi-editor"
+description = "C bindings for xi-trace"
+
+[lib]
+name = "xi_trace_ffi"
+crate-type = ["staticlib"]
+
+[dependencies]
+xi-trace = { path = "../trace" }
+libc = "0.2.36"
+
+[[example]]
+name = "c"
+path = "examples/c/main.rs"
+
+[build-dependencies.cc]
+version = "1.0"
+features = ["parallel"]
